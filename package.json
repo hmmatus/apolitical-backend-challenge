@@ -6,7 +6,8 @@
   "main": "src/app.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "node --watch --env-file=.env src/app.ts",
+    "dev": "tsx watch --env-file=.env src/app.ts",
+    "start": "tsx --env-file=.env src/app.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -19,19 +20,29 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "bcrypt"
+    ]
+  },
   "dependencies": {
+    "bcrypt": "6.0.0",
     "dotenv": "17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
     "express": "5.2.1",
-    "mysql2": "3.24.2"
+    "jsonwebtoken": "9.0.3",
+    "mysql2": "3.24.2",
+    "zod": "4.4.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "6.0.0",
     "@types/express": "5.0.6",
+    "@types/jsonwebtoken": "9.0.10",
     "@types/node": "26.3.0",
-    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/coverage-v8": "4.1.11",
     "drizzle-kit": "1.0.0-rc.4",
     "tsx": "4.23.12",
     "typescript": "7.0.2",
-    "vitest": "^4.1.11"
+    "vitest": "4.1.11"
   }
 }

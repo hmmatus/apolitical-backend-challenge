@@ -16,7 +16,8 @@ even though the source files are `.ts`.
 
 ## Layering rule (non-negotiable)
 
-Dependencies point one direction only:
+Dependencies point one dire
+ction only:
 
 ```
 routes.ts → controller.ts → service.ts → <Entity>Repository (interface)
