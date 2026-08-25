@@ -35,9 +35,14 @@ on order totals, auth, automated tests, CI/CD.
 - Type-check (no emit — `tsconfig.json` has `noEmit: true`): `pnpm build`
 - Run the app: `pnpm start` (runs `src/app.ts` directly via Node's native TypeScript support — no separate compile
   step; requires Node 24+, which is what's installed here)
-- Tests: not set up — `pnpm test` currently just exits with an error. There is no test runner configured yet; pick
-  one (e.g. Vitest, Jest) before writing tests.
+- Tests: Vitest is configured (`vitest.config.ts`). `pnpm test` runs the suite once, `pnpm test:watch` runs in watch
+  mode, `pnpm test:coverage` runs with v8 coverage (text/html/lcov). Passes with exit code 0 even with zero test
+  files, so it won't break CI before tests are written.
 - Lint: no linter is configured yet.
+
+## Commit messages
+
+Format: `<fix|feature|chore|release|hotfix>: <description>`
 
 ## Architecture
 
