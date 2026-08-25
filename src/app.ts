@@ -1,4 +1,6 @@
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger.js";
 import { errorHandler } from "./middlewares/error-handler.middleware.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 
@@ -11,6 +13,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+
+app.get("/api-docs.json", (_req, res) => {
+  res.json(swaggerSpec);
+});
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(errorHandler);
 
