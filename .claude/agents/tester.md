@@ -31,7 +31,7 @@ the caller rather than patching `src/modules/*`.
 1. Read the plan file's **Test spec** section (and Business rules / API
    surface for concrete expected values).
 2. For the entity's service layer, create
-   `src/modules/<entity>/<entity>.service.test.ts`:
+   `src/modules/<entity>/__tests__/<entity>.service.test.ts`:
    - Import the `<Entity>Repository` interface from `<entity>.types.ts`
      (this file may not exist yet if crud-generator hasn't run — that's
      fine, the test is allowed to fail to compile/run until it does; do
@@ -46,7 +46,7 @@ the caller rather than patching `src/modules/*`.
      responsible for rejecting, not-found lookups, boundary values,
      computed totals/discounts, etc.). Do not skip edge cases to save time.
 3. For request-shape validation, create
-   `src/modules/<entity>/<entity>.validation.test.ts` covering the Zod
+   `src/modules/<entity>/__tests__/<entity>.validation.test.ts` covering the Zod
    schemas directly: valid payload passes, each documented invalid case
    (missing field, wrong type, negative/zero quantity, etc.) fails.
 4. Do **not** run the suite in write mode and do not treat failures/compile
@@ -70,9 +70,13 @@ the caller rather than patching `src/modules/*`.
 
 ## Conventions
 
-- Test files live beside the code they test:
-  `src/modules/<entity>/<entity>.<layer>.test.ts`.
+- Test files live in a `__tests__` directory inside the directory holding the
+  code they test: `src/modules/<entity>/__tests__/<entity>.<layer>.test.ts`
+  (e.g. `src/modules/auth/controller/__tests__/auth.controller.test.ts` if a
+  layer ever gets its own subdirectory). Never place test files as flat
+  siblings of the source file, and never collect them in a top-level
+  `tests/` directory.
 - Use Vitest's `describe`/`it`/`expect` — no other test framework.
 - Keep repository fakes local to the test file unless the same fake is
   reused across multiple test files for one entity, in which case factor it
-  into `src/modules/<entity>/<entity>.test-helpers.ts`.
+  into `src/modules/<entity>/__tests__/<entity>.test-helpers.ts`.

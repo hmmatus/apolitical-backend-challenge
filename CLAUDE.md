@@ -44,6 +44,12 @@ on order totals, auth, automated tests, CI/CD.
 
 Format: `<fix|feature|chore|release|hotfix>: <description>`
 
+## Test file location
+
+Test files live in a `__tests__` directory inside the directory holding the code they test
+(e.g. `src/modules/auth/controller/__tests__/auth.controller.test.ts`), never as flat siblings of the
+source file and never collected in a top-level `tests/` directory.
+
 ## Architecture
 
 - `src/app.ts` — entrypoint; creates the Express app and starts the HTTP listener on port 3000. Currently a single
