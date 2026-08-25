@@ -35,8 +35,35 @@ docker compose down      # stop
 docker compose down -v   # stop and wipe the MySQL volume
 ```
 
+## Database migrations
+
+Schema is defined with [Drizzle ORM](https://orm.drizzle.team) in `src/db/schema.ts`, config in `drizzle.config.ts`.
+These commands run on the host (not inside Docker) and connect via `MYSQL_HOST=localhost` / `MYSQL_PORT=3306` from
+`.env` — that's the host-mapped port for the `db` container, distinct from the `MYSQL_HOST=db` used *inside* the
+`app` container.
+
+MySQL must be running first:
+
+```bash
+docker compose up -d db
+```
+
+Then, after changing `src/db/schema.ts`:
+
+```bash
+pnpm db:generate   # diff schema.ts against ./drizzle, write a new SQL migration file
+pnpm db:migrate    # apply pending migration files to the database
+```
+
+Other available commands:
+
+- `pnpm db:push` — push `schema.ts` straight to the database, skipping migration files (dev-only, don't use once
+  migrations are shared/deployed)
+- `pnpm db:studio` — browse the database in Drizzle Studio
+
 ## Scripts
 
 - `pnpm build` — type-check only (`tsconfig.json` has `noEmit: true`, so this doesn't emit JS)
 - `pnpm dev` — run with file-watch auto-restart
 - `pnpm start` — run once
+- `pnpm db:generate` / `pnpm db:migrate` / `pnpm db:push` / `pnpm db:studio` — see [Database migrations](#database-migrations)
