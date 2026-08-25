@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       express:
-        specifier: ^5.2.1
+        specifier: 5.2.1
         version: 5.2.1
     devDependencies:
       '@types/express':
-        specifier: ^5.0.6
+        specifier: 5.0.6
         version: 5.0.6
       '@types/node':
-        specifier: ^26.3.0
+        specifier: 26.3.0
         version: 26.3.0
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
 
 packages:
