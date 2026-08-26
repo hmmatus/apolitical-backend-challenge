@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
 import { errorHandler } from "./middlewares/error-handler.middleware.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
+import { orderRouter } from "./modules/order/order.routes.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/orders", orderRouter);
 
 app.get("/api-docs.json", (_req, res) => {
   res.json(swaggerSpec);
