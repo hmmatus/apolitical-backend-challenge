@@ -1,3 +1,4 @@
+import path from "node:path";
 import swaggerJsdoc from "swagger-jsdoc";
 
 // Hand-written to mirror src/modules/auth/auth.dto.ts's Zod schemas — nothing enforces these
@@ -75,7 +76,7 @@ const options: swaggerJsdoc.Options = {
       },
     },
   },
-  apis: ["./src/modules/**/*.routes.ts"],
+  apis: [path.join(import.meta.dirname, "../modules/**/*.routes.ts")],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);

@@ -1,0 +1,6 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "test:coverage": { "dependsOn": ["transit"], "outputs": ["coverage/**"] }
+  }
+}

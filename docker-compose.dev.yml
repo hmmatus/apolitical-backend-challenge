@@ -1,0 +1,48 @@
+services:
+  web:
+    build:
+      target: dev
+    ports:
+      - "4321:4321"
+    volumes:
+      - .:/repo
+      - web_repo_node_modules:/repo/node_modules
+      - web_node_modules:/repo/apps/web/node_modules
+
+  api:
+    build:
+      target: dev
+    working_dir: /repo/apps/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/repo
+      - api_repo_node_modules:/repo/node_modules
+      - api_node_modules:/repo/apps/api/node_modules
+    env_file:
+      - apps/api/.env
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+
+  db:
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pizza_dev
+      MYSQL_USER: pizza
+      MYSQL_PASSWORD: pizza
+
+  migrate:
+    env_file:
+      - apps/api/.env
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+
+volumes:
+  api_repo_node_modules:
+  web_repo_node_modules:
+  web_node_modules:
+  api_node_modules:

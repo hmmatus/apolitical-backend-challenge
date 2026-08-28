@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      target: production
+    ports:
+      - "80:80"
+
+  api:
+    build:
+      target: production
+    env_file:
+      - apps/api/.env.prod
+
+  db:
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  migrate:
+    env_file:
+      - apps/api/.env.prod
