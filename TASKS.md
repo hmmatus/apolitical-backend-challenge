@@ -5,9 +5,9 @@ infra/tooling asks. Check off as completed.
 
 ## Required scope (CLAUDE.md)
 
-- [ ] `PizzaType` read endpoint(s) — `GET /api/pizza-types` (list). Needed so the UI can populate
-      the pizza picker on "Create Order"; not yet built (only `Order` CRUD exists). PR 2 of the
-      monorepo migration stack (see `docs/plans/monorepo-migration.md`).
+- [x] `PizzaType` read endpoint — `GET /api/pizza-types` (list, unpaginated, public — no
+      `authMiddleware`, since it's menu data the frontend's pizza picker needs before login). PR 2
+      of the monorepo migration stack (see `docs/plans/monorepo-migration.md`).
 - [ ] Homepage UI — list orders with calculated totals. `apps/web` is a stub (Astro + React
       scaffold only); the actual page is PR 3 of the migration stack.
 - [ ] "Create Order" screen UI — pick pizzas, set quantities, running total, submit against

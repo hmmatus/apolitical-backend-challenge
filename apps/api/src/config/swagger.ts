@@ -12,7 +12,10 @@ const options: swaggerJsdoc.Options = {
       description: "JSON API for the pizza-ordering backend challenge.",
     },
     servers: [{ url: "/" }],
-    tags: [{ name: "Auth", description: "Signup, login, and token lifecycle" }],
+    tags: [
+      { name: "Auth", description: "Signup, login, and token lifecycle" },
+      { name: "PizzaTypes", description: "Pizza catalog" },
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -71,6 +74,15 @@ const options: swaggerJsdoc.Options = {
           properties: {
             accessToken: { type: "string", description: "Short-lived JWT for the Authorization header" },
             refreshToken: { type: "string", description: "Opaque token used to obtain a new access token" },
+          },
+        },
+        PizzaType: {
+          type: "object",
+          required: ["id", "name", "price"],
+          properties: {
+            id: { type: "integer", example: 1 },
+            name: { type: "string", example: "Margherita" },
+            price: { type: "number", format: "float", example: 9.99 },
           },
         },
       },

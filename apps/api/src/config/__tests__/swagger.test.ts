@@ -21,6 +21,21 @@ describe("swaggerSpec", () => {
       expect(spec.paths).toHaveProperty(path);
       expect(spec.paths[path]).toHaveProperty("post");
     }
+  });
+
+  it("documents the pizza-types list endpoint as a GET operation", () => {
+    expect(spec.paths).toHaveProperty("/api/pizza-types");
+    expect(spec.paths["/api/pizza-types"]).toHaveProperty("get");
+  });
+
+  it("documents exactly the known endpoints and nothing else", () => {
+    const expectedPaths = [
+      "/api/auth/signup",
+      "/api/auth/login",
+      "/api/auth/refresh",
+      "/api/auth/logout",
+      "/api/pizza-types",
+    ];
 
     expect(Object.keys(spec.paths).sort()).toEqual(expectedPaths.sort());
   });
@@ -45,5 +60,6 @@ describe("swaggerSpec", () => {
     expect(spec.components.schemas).toHaveProperty("SignupRequest");
     expect(spec.components.schemas).toHaveProperty("LoginRequest");
     expect(spec.components.schemas).toHaveProperty("RefreshRequest");
+    expect(spec.components.schemas).toHaveProperty("PizzaType");
   });
 });
