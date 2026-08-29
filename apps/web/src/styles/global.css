@@ -1,0 +1,87 @@
+/* Self-hosted brand fonts (Fontsource) — no external request at runtime, works offline. */
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/outfit/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+:root {
+  /* Brand */
+  --color-brand:        #D62828;  /* tomato — primary actions, logo */
+  --color-brand-hover:  #B71F1F;
+  --color-brand-subtle: #FBE8E8;  /* tinted backgrounds, focus halo */
+  --color-accent:       #E9B44C;  /* golden crust — highlights, badges */
+  --color-basil:        #2A9D5C;  /* success */
+
+  /* Surfaces */
+  --color-surface:      #FFF6E9;  /* warm cream page background */
+  --color-surface-raised: #FFFFFF;
+  --color-border:       #E8DCC8;
+
+  /* Ink */
+  --color-ink:          #1F1B16;
+  --color-ink-muted:    #6B6259;
+  --color-ink-inverse:  #FFF6E9;
+
+  /* Feedback */
+  --color-danger:       #C1121F;
+  --color-danger-subtle:#FDECEC;
+
+  /* Type */
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --text-xs: 0.75rem;  --text-sm: 0.875rem; --text-base: 1rem;
+  --text-lg: 1.125rem; --text-xl: 1.5rem;   --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+
+  /* Space — 4px base */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.5rem;  --space-6: 2rem;
+  --space-8: 3rem;
+
+  /* Radius — generous, the brand is round food */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(31, 27, 22, 0.06);
+  --shadow-md: 0 4px 16px rgba(31, 27, 22, 0.10);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+  --duration: 160ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand-subtle);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--color-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration: 0ms;
+  }
+}

@@ -1,0 +1,24 @@
+.input {
+  width: 100%;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-raised);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--duration) var(--ease);
+}
+
+.input::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.invalid {
+  border-color: var(--color-danger);
+}

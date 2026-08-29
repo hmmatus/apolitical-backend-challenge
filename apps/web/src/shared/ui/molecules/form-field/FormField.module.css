@@ -1,0 +1,28 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.inputRow {
+  position: relative;
+  display: flex;
+}
+
+.inputWithAdornment {
+  padding-right: var(--space-8);
+}
+
+.adornment {
+  position: absolute;
+  right: var(--space-1);
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.toggle {
+  background: none;
+  border: none;
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+}
+
+.toggle:hover {
+  color: var(--color-ink);
+}
+
+.formError {
+  color: var(--color-danger);
+  background-color: var(--color-danger-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
