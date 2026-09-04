@@ -1,17 +1,19 @@
 ---
-
+// Static output has no server-side redirect (no Astro.redirect() without SSR), so this is a
+// client-side bounce. /orders' own guard decides from there whether the visitor lands on the
+// order list or gets sent on to /login.
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Pizza App</title>
-	</head>
-	<body>
-		<h1>Pizza App — frontend coming in PR 3</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/orders" />
+    <title>Pizza App</title>
+  </head>
+  <body>
+    <script is:inline>
+      location.replace("/orders");
+    </script>
+    <p>Redirecting…</p>
+  </body>
 </html>

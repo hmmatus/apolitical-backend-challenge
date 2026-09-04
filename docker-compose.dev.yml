@@ -8,6 +8,8 @@ services:
       - .:/repo
       - web_repo_node_modules:/repo/node_modules
       - web_node_modules:/repo/apps/web/node_modules
+    environment:
+      - API_PROXY_TARGET=http://api:3000
 
   api:
     build:

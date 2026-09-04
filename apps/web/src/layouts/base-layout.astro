@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  /**
+   * When true, injects the pre-paint redirect script (layer 1 of the route guard — see
+   * docs/plans/frontend-login.md, "Route guard — two layers"). Runs before the page's island
+   * hydrates, so a logged-out visitor never sees a flash of authenticated content. Not a security
+   * boundary: it only checks whether a token string exists, not whether it's valid.
+   */
+  guarded?: boolean;
+}
+
+const { title, guarded = false } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {
+      guarded && (
+        <script is:inline>
+          try {
+            if (!sessionStorage.getItem("piznek.accessToken")) {
+              location.replace("/login");
+            }
+          } catch {
+            location.replace("/login");
+          }
+        </script>
+      )
+    }
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
