@@ -1,33 +1,21 @@
 services:
-  app:
+  web:
     build:
       context: .
-      target: dev
-    ports:
-      - "${PORT:-3000}:${PORT:-3000}"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - MYSQL_HOST=db
-      - MYSQL_PORT=3306
-      - MYSQL_DATABASE=${MYSQL_DATABASE:-pizza_dev}
-      - MYSQL_USER=${MYSQL_USER:-pizza}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-pizza}
+      dockerfile: docker/web.Dockerfile
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
     depends_on:
       db:
         condition: service_healthy
-    command: pnpm dev
 
   db:
     image: mysql:8.4
-    ports:
-      - "127.0.0.1:3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-pizza_dev}
-      MYSQL_USER: ${MYSQL_USER:-pizza}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-pizza}
     volumes:
       - mysqldata:/var/lib/mysql
     healthcheck:
@@ -35,6 +23,18 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  migrate:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+      target: dev
+    working_dir: /repo/apps/api
+    command: ["pnpm", "run", "db:migrate"]
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["migrate"]
 
 volumes:
   mysqldata:
