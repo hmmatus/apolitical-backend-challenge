@@ -58,8 +58,10 @@ function redirectToLogin(): void {
   window.location.assign("/login");
 }
 
-function isRefreshRequest(config: InternalAxiosRequestConfig | undefined): boolean {
-  return Boolean(config?.url?.includes("/auth/refresh"));
+// Public auth endpoints never carry a session, so a 401 from one of them is a real credential
+// failure — never "the access token expired," since there is no token yet.
+function isPublicAuthRequest(config: InternalAxiosRequestConfig | undefined): boolean {
+  return Boolean(config?.url?.match(/\/auth\/(login|signup|refresh)/));
 }
 
 // Request interceptor — proactive: refresh *before* sending if the token we're about to attach
@@ -95,7 +97,7 @@ apiClient.interceptors.response.use(
   async (error: AxiosError) => {
     const config = error.config as RetryableRequestConfig | undefined;
 
-    if (error.response?.status !== 401 || !config || isRefreshRequest(config)) {
+    if (error.response?.status !== 401 || !config || isPublicAuthRequest(config)) {
       return Promise.reject(error);
     }
 
