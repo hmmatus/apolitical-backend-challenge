@@ -9,7 +9,7 @@ import type {
   OrderRepository,
   PizzaType,
 } from "./order.types.js";
-import { centsToAmount, toCents } from "./utils/money.js";
+import { centsToAmount, toCents } from "../../utils/money.js";
 
 export class OrderService {
   constructor(private readonly repo: OrderRepository) {}
